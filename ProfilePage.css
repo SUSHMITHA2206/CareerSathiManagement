@@ -1,0 +1,33 @@
+/* src/components/ProfilePage.css */
+.profile-container {
+    text-align: center;
+    margin-top: 60px;
+  }
+  
+  .profile-heading {
+    font-size: 2.5rem;
+    color: #2c3e50;
+  }
+  
+  .profile-subtext {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    color: #555;
+  }
+  
+  .profile-buttons button {
+    background-color: #3498db;
+    color: white;
+    padding: 14px 24px;
+    margin: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .profile-buttons button:hover {
+    background-color: #2980b9;
+  }
+  

@@ -1,0 +1,79 @@
+import React, { useEffect, useState } from 'react';
+import ApplicantService from '../services/ApplicantService'; // Assuming FinancialService exists
+
+const ViewFinancialComponent = () => {
+    const [Applications, setApplications] = useState([]);  // State to hold all financial applications
+    const [loading, setLoading] = useState(true); // State to handle loading state
+
+    useEffect(() => {
+        // Fetch all financial aid applications from the backend
+        ApplicantService.getApplicants()
+            .then((res) => {
+                setApplications(res.data);  // Set the data into state
+                setLoading(false);  // Set loading to false once data is fetched
+            })
+            .catch((err) => {
+                console.error('Error fetching financial aid applications:', err);
+                setLoading(false);  // Stop loading even if an error occurs
+            });
+    }, []);  // Empty dependency array, so this effect runs only once when the component mounts
+
+    if (loading) {
+        return <div>Loading...</div>;  // Display loading message while data is being fetched
+    }
+
+    return (
+        <div>
+            <br />
+            <h3 className="text-center">View All Financial Aid Applications</h3>
+            <div className="table-responsive">
+                <table className="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Applicant Name</th>
+                            <th>Email ID</th>
+                            <th>Annual Income ($)</th>
+                            <th>Financial Need Description</th>
+                            <th>Supporting Documents</th>
+                            <th>Application Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {Applications.length > 0 ? (
+                            Applications.map((application) => (
+                                <tr key={application.id}>
+                                    <td>{application.name}</td>
+                                    <td>{application.emailId}</td>
+                                    <td>{application.annualIncome}</td>
+                                    <td>{application.financialNeed}</td>
+                                    <td>{application.supportingDocuments}</td>
+                                    <td>{application.status}</td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="6">No financial aid applications found.</td>
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    );
+};
+
+export default ViewFinancialComponent;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
